@@ -1,0 +1,20 @@
+<!-- <p>Bienvenu au {{hotelName}}</p> -->
+<app-header></app-header>
+<app-header></app-header>
+<app-header></app-header>
+<div [hidden]="hideRooms">
+    Nombre de chambres
+    <div [style]="{'color': rooms.availableRooms ? 'green' : 'red'}" [innerText]="numberOfRooms"></div>
+</div>
+
+<button class="btn btn-success"  (click)="addRoom()">Ajouter une chambre</button><br>
+
+@if(selectedRoom){
+  <div>{{selectedRoom | json}}</div>
+}
+
+@if (rooms.availableRooms > 0) {
+  <app-rooms-list [rooms]="roomList" [title]="title" (selectedRoom)="selectRoom($event)"></app-rooms-list>
+}
+
+<button class="btn btn-outline-primary" (click)="toggle()">Toggle</button>
