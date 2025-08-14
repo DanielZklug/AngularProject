@@ -1,0 +1,54 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    
+    @if (totalItems > 0) {
+      <ion-buttons slot="end">
+      <ion-button color="white" fill="clear" routerLink="cart">
+        <ion-icon name="cart-outline" slot="icon-only"></ion-icon>
+        <ion-badge>{{totalItems}}</ion-badge>
+      </ion-button>
+      </ion-buttons>
+    }
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item lines="none" class="ion-margin-vertical">
+    <ion-label>Hello
+      <p>
+        <ion-text>
+          Codecraft
+        </ion-text>
+      </p>
+    </ion-label>
+
+    <ion-thumbnail slot="end">
+      <img [src]="userAvatar" alt="user avatar">
+    </ion-thumbnail>
+  </ion-item>
+  <ion-list-header>
+    Your insights
+  </ion-list-header>
+  <ion-row class="ion-margin">
+    @for (item of insights; track $index) {
+      <ion-col size="6" class="ion-text-center" [routerLink]="item.route">
+        <ion-card color="light" (click)="match(item.click)">
+          <ion-thumbnail [style.background]="item.thumbnail">
+            <ion-icon [name]="item.icon" [color]="item.color"></ion-icon>
+          </ion-thumbnail>
+          <ion-label>{{ item.label }}</ion-label>
+        </ion-card>
+      </ion-col>
+    }
+  </ion-row>
+
+  <ion-toast 
+  [isOpen]="isToast"
+  [message]="toastData?.Message"
+  [position]="'bottom'"
+  [color]="toastData?.color"
+  [duration]="3000"
+  (didDismiss)="isToast = !isToast"
+  ></ion-toast>
+</ion-content>
