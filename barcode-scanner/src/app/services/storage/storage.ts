@@ -4,7 +4,7 @@ import { Preferences } from "@capacitor/preferences";
 @Injectable({
   providedIn: 'root'
 })
-export class Storage {
+export class StorageService {
   
   setStorage(key: string, value: string): void {
     Preferences.set({ key, value})

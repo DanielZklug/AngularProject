@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Cart } from '../services/cart/cart';
 import 
@@ -30,7 +30,7 @@ import { cart } from 'ionicons/icons';
     IonBadge
 ],
 })
-export class HomePage {
+export class HomePage implements OnInit, OnDestroy {
   isToast = false;
   toastData : any = {};
   totalItems: number = 0;
@@ -142,4 +142,10 @@ export class HomePage {
     })
   }
   constructor() {}
+
+  ngOnDestroy() {
+    if (this.cartSub) {
+      this.cartSub.unsubscribe();
+    }
+  }
 }

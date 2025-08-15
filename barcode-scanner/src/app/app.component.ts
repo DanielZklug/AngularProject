@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { bagHandleOutline, barcodeOutline, cartOutline, checkmarkCircleOutline, closeOutline, listOutline, scanOutline } from "ionicons/icons";
+import { add, bagHandleOutline, barcodeOutline, cartOutline, checkmarkCircleOutline, closeOutline, listOutline, remove, scanOutline } from "ionicons/icons";
+
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,9 @@ export class AppComponent {
       checkmarkCircleOutline,
       bagHandleOutline,
       barcodeOutline,
-      closeOutline
+      closeOutline,
+      remove,
+      add
     });
   }
 }
