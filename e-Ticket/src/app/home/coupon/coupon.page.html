@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>{{sectionName}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{sectionName}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-header>
+    <ion-input 
+      label="Montant" 
+      label-placement="floating" 
+      type="number" fill="outline" 
+      placeholder="Entrez le montant du coupon" 
+      helperText="Entrez un montant supérieur à 0"
+      errorText="Le montant doit être supérieur à 0"
+      inputmode="numeric"
+      pattern="[\p{N}]"
+      [min]="1"
+    ></ion-input>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button expand="block">
+        <ion-text>Enregistrer</ion-text>
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

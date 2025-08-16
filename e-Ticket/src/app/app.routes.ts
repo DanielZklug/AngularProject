@@ -1,0 +1,30 @@
+import { Routes } from '@angular/router';
+
+export const routes: Routes = [
+  {
+    path: 'home',
+    children: [
+      {
+        path : '',
+        loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
+      },
+      {
+        path: 'settings',
+        loadComponent: () => import('./home/settings/settings.page').then( m => m.SettingsPage)
+      },
+      {
+        path: 'coupon',
+        loadComponent: () => import('./home/coupon/coupon.page').then( m => m.CouponPage)
+      },
+      {
+        path: 'history',
+        loadComponent: () => import('./home/history/history.page').then( m => m.HistoryPage)
+      }
+    ]
+  },
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full',
+  },
+];

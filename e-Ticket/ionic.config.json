@@ -1,0 +1,7 @@
+{
+  "name": "e-Ticket",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
