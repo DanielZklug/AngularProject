@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
+import { TranslateService } from '@ngx-translate/core';
 import { addIcons } from "ionicons";
+
 import { 
   settingsOutline,
   personCircleOutline,
@@ -16,7 +18,7 @@ import {
 })
 export class AppComponent {
   public appName: string = "e-Ticket";
-  constructor() {
+  constructor(translate : TranslateService) {
     this.addAllIcons();
   }
 

@@ -19,7 +19,11 @@ export const routes: Routes = [
       {
         path: 'history',
         loadComponent: () => import('./home/history/history.page').then( m => m.HistoryPage)
-      }
+      },
+      {
+        path: 'profile',
+        loadComponent: () => import('./home/profile/profile.page').then( m => m.ProfilePage)
+      },
     ]
   },
   {

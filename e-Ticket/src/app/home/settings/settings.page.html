@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button default-href="#"></ion-back-button>
     </ion-buttons>
-    <ion-title>Paramètres</ion-title>
+    <ion-title>{{sectionName}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,7 +12,7 @@
   <ion-list [inset]="true">
     <ion-item>
       <ion-toggle [(ngModel)]="paletteToggle" (ionChange)="toggleChange($event)" justify="space-between"
-        >Dark Mode</ion-toggle
+        >Mode sombre</ion-toggle
       >
     </ion-item>
   </ion-list>

@@ -1,6 +1,9 @@
 {
   "home": {
-    "title": "Tableau de bord",
-    "subtitle": "Vos aperçus"
+    "dashboard": "Tableau de bord",
+    "yourOptions": "Vos options",
+    "couponScan": "Scannez le coupon",
+    "newCoupon": "Nouveau coupon",
+    "history": "Historique"
   }
 }

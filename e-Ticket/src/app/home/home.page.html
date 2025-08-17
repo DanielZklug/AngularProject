@@ -4,7 +4,7 @@
       {{appName}}
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button routerLink="settings" fill="clear">
+      <ion-button routerLink="settings">
         <ion-icon  name="settings-outline" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -13,7 +13,7 @@
 
 <ion-content>
   <ion-item lines="none" class="ion-margin-vertical">
-    <ion-label>{{currentLanguage.home.dashboard}}
+    <ion-label>{{'home.dashboard' | translate}}
       <p>
         <ion-text>
           Codecraft
@@ -22,7 +22,7 @@
     </ion-label>
 
     <ion-buttons slot="end">
-      <ion-button fill="clear">
+      <ion-button routerLink="profile">
         <ion-icon id="profile" name="person-circle-outline" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -30,14 +30,14 @@
 
   <ion-list-header>
     <ion-label>
-      {{currentLanguage.home.yourOptions}}
+      {{'home.yourOptions' | translate}}
     </ion-label>
   </ion-list-header>
 
   <ion-row class="ion-margin">
     @for (item of insights; track $index) {
       <ion-col size="6" class="ion-text-center" [routerLink]="item.route">
-        <ion-card color="light" (click)="match(item.click)">
+        <ion-card color="light">
           <ion-thumbnail [style.background]="item.thumbnail">
             <ion-icon [name]="item.icon" [color]="item.color"></ion-icon>
           </ion-thumbnail>

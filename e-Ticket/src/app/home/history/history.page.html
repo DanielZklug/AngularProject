@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>history</ion-title>
+    <ion-title>historique</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
@@ -8,14 +8,28 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Card Title</ion-card-title>
-      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-    </ion-card-header>
+  <ion-list>
+    @for (item of coupons; track $index) {
+      <ion-item-sliding>
+        <ion-item>
+          <ion-label class="coupon-label">
+            <div class="coupon-header">
+              <span class="coupon-title">Coupon</span>
+              <ion-text [color]="item.status ? 'success' : 'danger'" class="coupon-status">{{item.status ? 'Actif' : 'Epuisé'}}</ion-text>
+            </div>
+            <div class="coupon-price">
+              <ion-text color="primary">{{item.amount}} {{currency}}</ion-text>
+            </div>
+            <div class="coupon-details">
+              <p>{{item.create_at | date:'medium':undefined:'fr'}}</p>
+            </div>
+          </ion-label>
+        </ion-item>
 
-    <ion-card-content>
-      Here's a small text description for the card content. Nothing more, nothing less.
-    </ion-card-content>
-  </ion-card>
+        <ion-item-options>
+          <ion-item-option  (click)="presentAlert()" color="danger">Supprimer</ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    }
+  </ion-list>
 </ion-content>

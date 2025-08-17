@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { 
   IonHeader, 
@@ -17,6 +17,8 @@ import {
   IonCol,
   IonCard,
 } from '@ionic/angular/standalone';
+import { TranslateModule } from '@ngx-translate/core';
+// import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -38,7 +40,8 @@ import {
     IonRow,
     IonCol,
     IonCard,
-    RouterLink
+    RouterLink,
+    TranslateModule
   ],
 })
 export class HomePage {
@@ -68,33 +71,24 @@ export class HomePage {
     {
       thumbnail : 'rgba(240, 94, 112, 0.2)',
       icon : 'scan-outline',
-      label : this.currentLanguage.home.couponScan,
+      label :"Scannez le coupon",
       color : 'danger',
       route : '',
-      click : 1,
     },
      {
       thumbnail : 'rgba(255, 152, 0, 0.2)',
       icon : 'ticket-outline',
-      label : this.currentLanguage.home.newCoupon,
+      label : "Nouveau coupon",
       color : 'warning',
       route : 'coupon',
-      click : 0
     },
     {
       thumbnail : 'rgba(76, 175, 80, 0.2)',
       icon : 'list-outline',
-      label : this.currentLanguage.home.history,
+      label : "Historique",
       color : 'success',
       route : 'history',
-      click : 0
     },
   ]
-
-  public trans() {
-    return this.currentLanguage;
-  }
-
-  match(p:number){}
   constructor() {}
 }

@@ -1,6 +1,9 @@
 {
-    "home": {
-      "title": "Dashboard",
-      "subtitle": "Your insights"
-    }
+  "home": {
+    "dashboard": "Dashboard",
+    "yourOptions": "Your options",
+    "couponScan": "Coupon Scan",
+    "newCoupon": "New Coupon",
+    "history": "History"
+  }
 }

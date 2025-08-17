@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { 
-  IonButton,
   IonButtons,
   IonContent, 
   IonHeader, 
@@ -13,7 +12,6 @@ import {
   IonToggle, 
   IonToolbar,
   IonBackButton, 
-  IonIcon
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -32,14 +30,14 @@ import {
     IonListHeader,
     IonItem,
     IonToggle,
-    IonButton,
     IonButtons,
     IonBackButton,
-    IonIcon
   ]
 })
 export class SettingsPage implements OnInit {
+  sectionName = 'Paramètres';
   paletteToggle = false;
+  theme = this.paletteToggle ? 'ligth' : 'dark'
 
   constructor() { }
 
@@ -54,6 +52,7 @@ export class SettingsPage implements OnInit {
     // Listen for changes to the prefers-color-scheme media query
     prefersDark.addEventListener('change', (mediaQuery) => this.initializeDarkPalette(mediaQuery.matches));
   }
+  
 
   // Check/uncheck the toggle and update the palette based on isDark
   initializeDarkPalette(isDark: boolean) {
