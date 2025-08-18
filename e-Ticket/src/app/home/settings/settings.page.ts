@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import { 
   IonButtons,
   IonContent, 
@@ -12,6 +13,8 @@ import {
   IonToggle, 
   IonToolbar,
   IonBackButton, 
+  IonSelect,
+  IonSelectOption
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -32,6 +35,9 @@ import {
     IonToggle,
     IonButtons,
     IonBackButton,
+    IonSelect,
+    IonSelectOption,
+    TranslateModule
   ]
 })
 export class SettingsPage implements OnInit {

@@ -15,6 +15,8 @@ import {
   IonToolbar,
   IonBackButton
 } from '@ionic/angular/standalone';
+import { TranslateModule } from '@ngx-translate/core';
+import { Database } from 'src/app/services/database';
 
 @Component({
   selector: 'app-coupon',
@@ -35,14 +37,19 @@ import {
     IonButton,
     IonText,
     IonButtons,
-    IonBackButton
+    IonBackButton,
+    TranslateModule
   ]
 })
 export class CouponPage implements OnInit {
-  public sectionName : string = "Nouveau Coupon";
-  
+  public couponAmount = 0
 
-  constructor() { }
+  constructor(private database : Database) { }
+
+  async createCoupon(){
+    await this.database.addCoupon(this.couponAmount);
+    this.couponAmount = 0;
+  }
 
   ngOnInit() {
   }

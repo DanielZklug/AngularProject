@@ -17,7 +17,7 @@ import {
   IonCol,
   IonCard,
 } from '@ionic/angular/standalone';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 // import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -46,49 +46,29 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class HomePage {
   public appName: string = "e-Ticket";
-
-  public en = {
-    home: {
-      dashboard: "Dashboard",
-      yourOptions: "Your options",
-      couponScan: "Coupon Scan",
-      newCoupon: "New Coupon",
-      history: "History",
-    }
-  };
-  public fr = {
-    home: {
-      dashboard: "Tableau de bord",
-      yourOptions: "Vos options",
-      couponScan: "Scannez le coupon",
-      newCoupon: "Nouveau coupon",
-      history: "Historique",
-    }
-  };
-  public currentLanguage = this.fr;
-
+  
   public insights = [
     {
       thumbnail : 'rgba(240, 94, 112, 0.2)',
       icon : 'scan-outline',
-      label :"Scannez le coupon",
+      label : this.translate.instant('home.couponScan'),
       color : 'danger',
       route : '',
     },
      {
       thumbnail : 'rgba(255, 152, 0, 0.2)',
       icon : 'ticket-outline',
-      label : "Nouveau coupon",
+      label : this.translate.instant('home.newCoupon'),
       color : 'warning',
       route : 'coupon',
     },
     {
       thumbnail : 'rgba(76, 175, 80, 0.2)',
       icon : 'list-outline',
-      label : "Historique",
+      label : this.translate.instant('home.history'),
       color : 'success',
       route : 'history',
     },
   ]
-  constructor() {}
+  constructor(private translate: TranslateService) {}
 }

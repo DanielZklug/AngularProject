@@ -5,5 +5,34 @@
     "couponScan": "Scannez le coupon",
     "newCoupon": "Nouveau coupon",
     "history": "Historique"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "language": "Langue",
+    "darkMode": "Mode sombre",
+    "notifications": "Notifications",
+    "appearance" : "Apparance",
+    "french" : "Français",
+    "english" : "Anglais"
+  },
+  "coupon": {
+    "scan": "Scannez le coupon",
+    "new": "Nouveau coupon",
+    "history": "Historique des coupons",
+    "amount": "Montant",
+    "placeholder": "Entrez le montant du coupon",
+    "helperText": "Veuillez entrer un montant supérieur à 0",
+    "errorText": "Veuillez entrer un montant valide",
+    "save": "Enregistrer"
+  },
+  "history":{
+    "title" : "Historique",
+    "coupon": "Coupon",
+    "active" : "Actif",
+    "used" : "Utilisé",
+    "delete" : "Supprimer",
+    "confirmMessage" : "Voulez-vous vraiment supprimer ce coupon ?",
+    "cancel" : "Annuler",
+    "ok" : "OK"
   }
 }

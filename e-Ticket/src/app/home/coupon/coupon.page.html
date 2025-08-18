@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>{{sectionName}}</ion-title>
+    <ion-title>{{'coupon.new' | translate}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
@@ -10,27 +10,28 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">{{sectionName}}</ion-title>
+      <ion-title size="large">{{'coupon.new' | translate}}</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-card>
     <ion-card-header>
     <ion-input 
-      label="Montant" 
+      [label]="'coupon.amount' | translate" 
       label-placement="floating" 
       type="number" fill="outline" 
-      placeholder="Entrez le montant du coupon" 
-      helperText="Entrez un montant supérieur à 0"
-      errorText="Le montant doit être supérieur à 0"
+      [placeholder]="'coupon.placeholder'| translate" 
+      [helperText]="'coupon.helperText' | translate"
+      [errorText]="'coupon.errorText' | translate"
+      [(ngModel)]="couponAmount"
       inputmode="numeric"
       pattern="[\p{N}]"
       [min]="1"
     ></ion-input>
     </ion-card-header>
     <ion-card-content>
-      <ion-button expand="block">
-        <ion-text>Enregistrer</ion-text>
+      <ion-button expand="block" (click)="createCoupon()">
+        <ion-text>{{'coupon.save' | translate}}</ion-text>
       </ion-button>
     </ion-card-content>
   </ion-card>

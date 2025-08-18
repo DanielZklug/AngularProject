@@ -10,6 +10,7 @@ import {
   ticketOutline,
   listOutline
 } from "ionicons/icons";
+import { Database } from './services/database';
 
 @Component({
   selector: 'app-root',
@@ -18,8 +19,13 @@ import {
 })
 export class AppComponent {
   public appName: string = "e-Ticket";
-  constructor(translate : TranslateService) {
+  constructor(translate : TranslateService, private database : Database) {
     this.addAllIcons();
+    this.initApp();
+  }
+
+  async initApp() {
+    await this.database.initializePlugin();
   }
 
   addAllIcons(){

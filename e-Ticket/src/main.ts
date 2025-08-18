@@ -29,7 +29,7 @@ bootstrapApplication(AppComponent, {
           useFactory: HttpLoaderFactory,
           deps: [HttpClient]
         },
-        defaultLanguage: 'fr'
+        defaultLanguage: 'en'
       })
     ),
     TranslateService

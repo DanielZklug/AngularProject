@@ -3,17 +3,26 @@
     <ion-buttons slot="start">
       <ion-back-button default-href="#"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{sectionName}}</ion-title>
+    <ion-title>{{'settings.title' | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list-header>Apparance</ion-list-header>
+  <ion-list-header>{{'settings.appearance' | translate}}</ion-list-header>
   <ion-list [inset]="true">
     <ion-item>
       <ion-toggle [(ngModel)]="paletteToggle" (ionChange)="toggleChange($event)" justify="space-between"
-        >Mode sombre</ion-toggle
+        >{{'settings.darkMode' | translate}}</ion-toggle
       >
+    </ion-item>
+  </ion-list>
+  <ion-list-header>{{'settings.language' | translate}}</ion-list-header>
+  <ion-list>
+    <ion-item>
+      <ion-select aria-label="Favorite Language" value="français">
+        <ion-select-option value="français">{{'settings.french' | translate}}</ion-select-option>
+        <ion-select-option value="anglais">{{'settings.english' | translate}}</ion-select-option>
+      </ion-select>
     </ion-item>
   </ion-list>
 </ion-content>
