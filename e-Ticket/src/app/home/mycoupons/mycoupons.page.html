@@ -1,14 +1,21 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>{{'history.title' | translate}}</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
+      <ion-back-button default-href="#"></ion-back-button>
     </ion-buttons>
+    <ion-segment [scrollable]="true" value="all">
+      <ion-segment-button value="all">
+        <ion-label>All</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="favorites">
+        <ion-label>Favorites</ion-label>
+      </ion-segment-button>
+    </ion-segment>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-list>
+<ion-content>
+  <ion-list class="ion-margin-top">
     @if(coupons.length > 0){
       @for (item of coupons; track $index) {
         <ion-item-sliding>
@@ -29,7 +36,6 @@
               <ion-icon slot="icon-only" name="barcode-outline"></ion-icon>
             </ion-button>
           </ion-item>
-
           <ion-item-options>
             <ion-item-option  (click)="presentAlert(item.id)" color="danger">{{'history.delete' | translate}}</ion-item-option>
           </ion-item-options>
@@ -42,7 +48,6 @@
       </div>
     }
   </ion-list>
-
   <ion-modal #barcode_modal 
     [isOpen]="showBarcode" 
     (didDismiss)="showBarcode = false"

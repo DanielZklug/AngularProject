@@ -20,7 +20,7 @@
   <ion-list [inset]="true">
     <ion-item>
       <ion-select cancelText="{{ 'settings.cancel' | translate }}" 
-  okText="{{ 'settings.ok' | translate }}" aria-label="Favorite Language" value="fr" (ionChange)="handleChange($event)">
+  okText="{{ 'settings.ok' | translate }}" aria-label="Favorite Language" [value]="'settings.lang'|translate" (ionChange)="handleChange($event)">
         <ion-select-option value="fr">{{'settings.french' | translate}}</ion-select-option>
         <ion-select-option value="en">{{'settings.english' | translate}}</ion-select-option>
       </ion-select>

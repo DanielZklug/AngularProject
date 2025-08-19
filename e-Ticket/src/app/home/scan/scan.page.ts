@@ -11,7 +11,13 @@ import {
   IonToolbar,
   IonBackButton,
   IonButtons,
-  IonToast
+  IonToast,
+  IonRow,
+  IonCol,
+  IonCard,
+  IonIcon,
+  IonThumbnail,
+  IonLabel
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -29,7 +35,14 @@ import {
     TranslateModule,
     IonBackButton,
     IonButtons,
-    IonToast
+    IonToast,
+    IonRow,
+    IonCol,
+    IonCard,
+    IonIcon,
+    IonThumbnail,
+    IonLabel
+
   ]
 })
 export class ScanPage implements OnInit {
@@ -38,15 +51,30 @@ export class ScanPage implements OnInit {
   private scanService = inject(Scan);
   scanSub!: Subscription;
 
+  public scans = [
+    {
+      thumbnail : 'rgba(240, 94, 112, 0.2)',
+      icon : 'scan-circle-outline',
+      label : 'scan.full',
+      color : 'danger',
+    },
+    {
+      thumbnail : 'rgba(76, 175, 80, 0.2)',
+      icon : 'scan-circle-sharp',
+      label : 'scan.id',
+      color : 'success',
+    }
+  ]
+
   constructor() { }
 
   ngOnInit() {
-    this.scanQrcode();
-    this.scanSub = this.scanService.scan.subscribe({
-      next : (scan) => {
-        console.log(scan);
-      }
-    })
+    // this.scanQrcode();
+    // this.scanSub = this.scanService.scan.subscribe({
+    //   next : (scan) => {
+    //     console.log(scan);
+    //   }
+    // })
   }
 
   public toast(params?:number) {

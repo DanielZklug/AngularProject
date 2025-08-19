@@ -16,7 +16,8 @@
     "french" : "Français",
     "english" : "Anglais",
     "cancel": "Annuler",
-    "ok": "OK"
+    "ok": "OK",
+    "lang" : "fr"
   },
   "coupon": {
     "scan": "Scannez le coupon",
@@ -24,7 +25,7 @@
     "history": "Historique des coupons",
     "amount": "Montant",
     "placeholder": "Entrez le montant du coupon",
-    "helperText": "Veuillez entrer un montant supérieur à 0",
+    "helperText": "Le montant doit être un multiple de 25",
     "errorText": "Veuillez entrer un montant valide",
     "save": "Enregistrer",
     "success" : "Coupon créé avec succès 🎉"
@@ -39,9 +40,17 @@
     "cancel" : "Annuler",
     "ok" : "OK",
     "success" : "Coupon supprimé avec succès 🎉",
-    "empty": "Aucun coupon créé pour le moment"
+    "empty": "Aucun coupon créé pour le moment",
+    "lang" : "fr"
   },
   "scan" : {
-    "title" : "Scan"
+    "title" : "Scan",
+    "full": "Scan Complet",
+    "id": "Scan Identifiant",
+    "fullDescription": "Récupère toutes les informations du ticket",
+    "idDescription": "Récupère uniquement l'ID du ticket"
+  },
+  "mycoupons":{
+    "title" : "Mes Coupons"
   }
 }

@@ -10,9 +10,22 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">scan</ion-title>
+      <ion-title size="large">{{'scan.title' | translate}}</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-row class="ion-margin">
+    @for (item of scans; track $index) {
+      <ion-col size="6" class="ion-text-center">
+        <ion-card color="light">
+          <ion-thumbnail [style.background]="item.thumbnail">
+            <ion-icon [name]="item.icon" [color]="item.color"></ion-icon>
+          </ion-thumbnail>
+          <ion-label>{{item.label | translate}}</ion-label>
+        </ion-card>
+      </ion-col>
+    }
+  </ion-row>
 
     <ion-toast 
   [isOpen]="isToast"

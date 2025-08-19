@@ -28,6 +28,10 @@ export const routes: Routes = [
         path: 'scan',
         loadComponent: () => import('./home/scan/scan.page').then( m => m.ScanPage)
       },
+      {
+        path: 'mycoupons',
+        loadComponent: () => import('./home/mycoupons/mycoupons.page').then( m => m.MycouponsPage)
+      },
     ]
   },
   {

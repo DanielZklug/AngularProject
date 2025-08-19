@@ -23,19 +23,21 @@
       fill="outline"
       [placeholder]="'coupon.placeholder' | translate"
       [helperText]="'coupon.helperText' | translate"
-      [errorText]="amountInput?.invalid && amountInput?.touched ? ('coupon.errorText' | translate) : null"
+      [errorText]="(amountInput?.touched && !isMultipleOf25)
+      ? ('coupon.errorText' | translate)
+      : null"
       [(ngModel)]="couponAmount"
       #amountInput="ngModel"
       name="couponAmount"
       required
-      min="1"
-      pattern="^[0-9]+$"
+      min="25"
       inputmode="numeric"
+      (ionChange)="onAmountChange($event)"
     >
     </ion-input>
     </ion-card-header>
     <ion-card-content>
-      <ion-button id="open-toast" expand="block" (click)="createCoupon()">
+      <ion-button [disabled]="!isMultipleOf25" id="open-toast" expand="block" (click)="createCoupon()">
         <ion-text>{{'coupon.save' | translate}}</ion-text>
       </ion-button>
     </ion-card-content>

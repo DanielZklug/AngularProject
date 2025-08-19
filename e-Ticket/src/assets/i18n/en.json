@@ -15,13 +15,14 @@
     "french" : "French",
     "english" : "English",
     "cancel": "Cancel",
-    "ok": "Ok"
+    "ok": "Ok",
+    "lang" : "en"
   },
   "coupon": {
     "new": "New Coupon",
     "amount": "Amount",
     "placeholder" : "Enter coupon amount",
-    "helperText": "Please enter the amount greather than 0",
+    "helperText": "The amount must be a multiple of 25.",
     "errorText": "Please enter a valid amount",
     "save": "Save",
     "success" : "Coupon created successfully 🎉"
@@ -36,9 +37,17 @@
     "cancel" : "Cancel",
     "ok" : "Ok",
     "success" : "Coupon deleted successfully 🎉",
-    "empty": "No coupon created yet"
+    "empty": "No coupon created yet",
+    "lang" : "en"
   },
   "scan":{
-    "title" : "Scan"
+    "title" : "Scan",
+    "full": "Full Scan",
+    "id": "ID Scan",
+    "fullDescription": "Retrieves all ticket information",
+    "idDescription": "Retrieves only the ticket ID"
+  },
+  "mycoupons":{
+    "title" : "My Coupons"
   }
 }

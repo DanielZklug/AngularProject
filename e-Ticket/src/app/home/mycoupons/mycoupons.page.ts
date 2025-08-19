@@ -1,72 +1,105 @@
-import { Component, OnInit, Injectable } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Barcode } from 'src/app/services/barcode/barcode';
 import { 
-  IonButtons, 
+  IonBackButton,
+  IonButtons,
   IonContent, 
   IonHeader, 
   IonTitle, 
-  IonToolbar, 
-  IonBackButton, 
-  IonIcon, 
-  IonList, 
-  IonItemSliding, 
-  IonItem, 
-  IonItemOption, 
-  IonItemOptions, 
-  IonLabel, 
-  IonText, 
-  AlertController, 
+  IonToolbar,
+  IonModal,
+  IonLabel,
+  IonIcon,
+  IonList,
+  IonItem,
+  IonItemSliding,
+  IonText,
+  IonItemOption,
+  IonItemOptions,
+  AlertController,
   IonButton,
-  IonModal
+  IonSegment,
+  IonSegmentButton
+
 } from '@ionic/angular/standalone';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-// import { Database } from 'src/app/services/database';
-import { LocalStorage } from 'src/app/services/localstorage/local-storage';
+import { LocalStorage ,Coupon } from 'src/app/services/localstorage/local-storage';
 import { ToastController } from '@ionic/angular';
+import { Barcode } from 'src/app/services/barcode/barcode';
 
 @Component({
-  selector: 'app-history',
-  templateUrl: './history.page.html',
-  styleUrls: ['./history.page.scss'],
+  selector: 'app-mycoupons',
+  templateUrl: './mycoupons.page.html',
+  styleUrls: ['./mycoupons.page.scss'],
   standalone: true,
   imports: [
-    IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
-    CommonModule,
+    IonContent, 
+    IonHeader,  
+    IonToolbar, 
+    CommonModule, 
     FormsModule,
+    TranslateModule,
     IonBackButton,
     IonButtons,
+    IonLabel,
+    IonIcon,
     IonList,
-    IonItemSliding,
     IonItem,
+    IonItemSliding,
+    IonText,
     IonItemOption,
     IonItemOptions,
-    IonLabel,
-    IonText,
-    TranslateModule,
-    IonIcon,
+    IonModal,
     IonButton,
-    IonModal
-]
+    IonSegment,
+    IonSegmentButton
+  ]
 })
-
-export class HistoryPage implements OnInit {
+export class MycouponsPage implements OnInit{
   showBarcode = this.barcode.showBarcode;
   public currency : string = "fr";
 
-  // public coupons = this.database.getCoupons();
-  public coupons = this.localStorage.getAll();
+  public coupons : Coupon[] = [
+    {
+      id: this.localStorage.generateUniqueId(),
+      amount: 500,
+      create_at: Date.now(),
+      status : true
+    },
+    {
+      id: this.localStorage.generateUniqueId(),
+      amount: 50,
+      create_at: Date.now(),
+      status : true
+    },
+    {
+      id: this.localStorage.generateUniqueId(),
+      amount: 150,
+      create_at: Date.now(),
+      status : true
+    },
+    {
+      id: this.localStorage.generateUniqueId(),
+      amount: 550,
+      create_at: Date.now(),
+      status : true
+    },
+    {
+      id: this.localStorage.generateUniqueId(),
+      amount: 300,
+      create_at: Date.now(),
+      status : true
+    }
+  ]
+
   constructor(
-    private alertController: AlertController, 
-    private translate: TranslateService,
+    private translate: TranslateService, 
     private localStorage : LocalStorage,
+    private alertController: AlertController,
     private toastCtrl: ToastController,
     private barcode : Barcode
-  ) {}
+  ) { }
 
   async presentAlert(id : string) {
     const alert = await this.alertController.create({

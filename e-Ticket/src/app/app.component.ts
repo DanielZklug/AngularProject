@@ -9,7 +9,12 @@ import {
   scanOutline,
   ticketOutline,
   listOutline,
-  checkmarkCircle
+  checkmarkCircle,
+  barcodeOutline,
+  closeOutline,
+  scanCircleOutline,
+  scaleSharp,
+  scanCircleSharp
 } from "ionicons/icons";
 import { Database } from './services/database/database';
 
@@ -36,7 +41,11 @@ export class AppComponent {
       scanOutline,
       ticketOutline,
       listOutline,
-      checkmarkCircle
+      checkmarkCircle,
+      barcodeOutline,
+      closeOutline,
+      scanCircleOutline,
+      scanCircleSharp
     })
   }
 }

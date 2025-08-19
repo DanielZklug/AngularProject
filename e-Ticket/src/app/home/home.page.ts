@@ -60,30 +60,30 @@ export class HomePage{
     {
       thumbnail : 'rgba(240, 94, 112, 0.2)',
       icon : 'scan-outline',
-      label : this.translate.instant('home.couponScan'),
+      label : 'home.couponScan',
       color : 'danger',
       route : 'scan',
     },
      {
       thumbnail : 'rgba(255, 152, 0, 0.2)',
       icon : 'ticket-outline',
-      label : this.translate.instant('home.newCoupon'),
+      label : 'home.newCoupon',
       color : 'warning',
       route : 'coupon',
     },
     {
       thumbnail : 'rgba(76, 175, 80, 0.2)',
       icon : 'list-outline',
-      label : this.translate.instant('home.history'),
+      label : 'home.history',
       color : 'success',
       route : 'history',
     },
     {
       thumbnail : 'rgba(94, 155, 240, 0.2)',
       icon : 'list-outline',
-      label : this.translate.instant('home.myCoupon'),
+      label : 'home.myCoupon',
       color : 'tertiary',
-      route : '',
+      route : 'mycoupons',
     }
   ]
   constructor(private translate: TranslateService,private localStorage : LocalStorage,) {}

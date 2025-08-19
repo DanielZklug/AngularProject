@@ -77,6 +77,8 @@ export class SettingsPage implements OnInit {
   handleChange(event: CustomEvent) {
     const lang = event.detail.value; // exemple: 'fr' ou 'en'
     this.translate.use(lang);
+
+    return lang;
   }
 
 }

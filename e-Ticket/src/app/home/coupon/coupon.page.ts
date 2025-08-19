@@ -21,6 +21,7 @@ import { ToastController } from '@ionic/angular';
 import { LocalStorage, Coupon } from 'src/app/services/localstorage/local-storage';
 
 
+
 @Component({
   selector: 'app-coupon',
   templateUrl: './coupon.page.html',
@@ -45,7 +46,8 @@ import { LocalStorage, Coupon } from 'src/app/services/localstorage/local-storag
   ]
 })
 export class CouponPage implements OnInit {
-  public couponAmount = 0
+  public couponAmount = 25
+  isMultipleOf25 = true;
 
   constructor(
     private localStorage : LocalStorage,
@@ -64,7 +66,7 @@ export class CouponPage implements OnInit {
 
   async createCoupon(){
     const newCoupon: Coupon = {
-      id: 'ABC' + Math.floor(Math.random() * 1000),
+      id: this.localStorage.generateUniqueId(),
       amount: parseInt(this.couponAmount.toString()),
       create_at: Date.now(),
       status : true
@@ -81,9 +83,18 @@ export class CouponPage implements OnInit {
     });
     toast.present();
 
-    this.couponAmount = 0;
+    this.couponAmount = 25;
   }
   ngOnInit() {
+  }
+
+  onAmountChange(event: any) {
+    const value = Number(event.detail.value);
+    this.isMultipleOf25 = this.validateMultipleOf25(value);
+  }
+
+  validateMultipleOf25(amount: number): boolean {
+    return amount > 0 && amount % 25 === 0;
   }
 
 }

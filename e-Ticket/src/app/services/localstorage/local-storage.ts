@@ -21,6 +21,10 @@ export class LocalStorage {
     return data ? JSON.parse(data) : [];
   }
 
+  generateUniqueId(): string {
+    return 'id-' + Math.random().toString(13).substr(2, 9) + '-' + Date.now();
+  }
+
   /** 🔹 Sauvegarder un nouveau coupon */
   save(coupon: Coupon): void {
     const coupons = this.getAll();
