@@ -4,7 +4,8 @@
     "yourOptions": "Vos options",
     "couponScan": "Scannez le coupon",
     "newCoupon": "Nouveau coupon",
-    "history": "Historique"
+    "history": "Historique",
+    "myCoupon" : "Mes Coupons"
   },
   "settings": {
     "title": "Paramètres",
@@ -13,7 +14,9 @@
     "notifications": "Notifications",
     "appearance" : "Apparance",
     "french" : "Français",
-    "english" : "Anglais"
+    "english" : "Anglais",
+    "cancel": "Annuler",
+    "ok": "OK"
   },
   "coupon": {
     "scan": "Scannez le coupon",
@@ -23,7 +26,8 @@
     "placeholder": "Entrez le montant du coupon",
     "helperText": "Veuillez entrer un montant supérieur à 0",
     "errorText": "Veuillez entrer un montant valide",
-    "save": "Enregistrer"
+    "save": "Enregistrer",
+    "success" : "Coupon créé avec succès 🎉"
   },
   "history":{
     "title" : "Historique",
@@ -33,6 +37,11 @@
     "delete" : "Supprimer",
     "confirmMessage" : "Voulez-vous vraiment supprimer ce coupon ?",
     "cancel" : "Annuler",
-    "ok" : "OK"
+    "ok" : "OK",
+    "success" : "Coupon supprimé avec succès 🎉",
+    "empty": "Aucun coupon créé pour le moment"
+  },
+  "scan" : {
+    "title" : "Scan"
   }
 }

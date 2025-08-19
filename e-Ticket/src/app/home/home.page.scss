@@ -43,3 +43,16 @@ ion-card, ion-thumbnail{
   align-items: center;
   justify-content: center;
 }
+
+ion-badge{
+  position: absolute;
+  top: 10px;
+  right: 50px;
+  border-radius: 50%;
+  height: 1rem;
+  width: 1rem;
+  margin: 0 -0.3rem 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      {{appName}}
+     <h1>{{appName}}</h1>
     </ion-title>
     <ion-buttons slot="end">
       <ion-button routerLink="settings">
@@ -12,11 +12,14 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-item lines="none" class="ion-margin-vertical">
     <ion-label>{{'home.dashboard' | translate}}
       <p>
         <ion-text>
-          Codecraft
+          CodeCraft
         </ion-text>
       </p>
     </ion-label>
@@ -39,6 +42,9 @@
       <ion-col size="6" class="ion-text-center" [routerLink]="item.route">
         <ion-card color="light">
           <ion-thumbnail [style.background]="item.thumbnail">
+            @if (item.route === 'history') {
+              <ion-badge>{{nbrCoupons}}</ion-badge>
+            }
             <ion-icon [name]="item.icon" [color]="item.color"></ion-icon>
           </ion-thumbnail>
           <ion-label>{{ item.label }}</ion-label>

@@ -17,11 +17,12 @@
     </ion-item>
   </ion-list>
   <ion-list-header>{{'settings.language' | translate}}</ion-list-header>
-  <ion-list>
+  <ion-list [inset]="true">
     <ion-item>
-      <ion-select aria-label="Favorite Language" value="français">
-        <ion-select-option value="français">{{'settings.french' | translate}}</ion-select-option>
-        <ion-select-option value="anglais">{{'settings.english' | translate}}</ion-select-option>
+      <ion-select cancelText="{{ 'settings.cancel' | translate }}" 
+  okText="{{ 'settings.ok' | translate }}" aria-label="Favorite Language" value="fr" (ionChange)="handleChange($event)">
+        <ion-select-option value="fr">{{'settings.french' | translate}}</ion-select-option>
+        <ion-select-option value="en">{{'settings.english' | translate}}</ion-select-option>
       </ion-select>
     </ion-item>
   </ion-list>

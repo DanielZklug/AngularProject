@@ -1,9 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonTitle, IonToolbar, IonBackButton, IonIcon, IonList, IonItemSliding, IonItem, IonItemOption, IonItemOptions, IonLabel, IonText, IonAlert, AlertController } from '@ionic/angular/standalone';
+import { 
+  IonButtons, 
+  IonContent, 
+  IonHeader, 
+  IonTitle, 
+  IonToolbar, 
+  IonBackButton, 
+  IonIcon, 
+  IonList, 
+  IonItemSliding, 
+  IonItem, 
+  IonItemOption, 
+  IonItemOptions, 
+  IonLabel, 
+  IonText, 
+  AlertController 
+} from '@ionic/angular/standalone';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { Database } from 'src/app/services/database';
+// import { Database } from 'src/app/services/database';
+import { LocalStorage } from 'src/app/services/localstorage/local-storage';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-history',
@@ -26,64 +44,28 @@ import { Database } from 'src/app/services/database';
     IonItemOptions,
     IonLabel,
     IonText,
-    TranslateModule
+    TranslateModule,
+    IonIcon
 ]
 })
+
 export class HistoryPage implements OnInit {
 
   public currency : string = "fr";
 
-  // public coupons = [
-  //   {
-  //     id: this.generateUniqueId(),
-  //     amount: 500,
-  //     create_at : Date.now(),
-  //     status: false
-  //   },
-  //   {
-  //     id: this.generateUniqueId(),
-  //     amount: 200,
-  //     create_at : Date.now(),
-  //     status: true
-  //   },
-  //   {
-  //     id: this.generateUniqueId(),
-  //     amount: 550,
-  //     create_at : Date.now(),
-  //     status: true
-  //   },
-  //   {
-  //     id: this.generateUniqueId(),
-  //     amount: 150,
-  //     create_at : Date.now(),
-  //     status: false
-  //   },
-  //   {
-  //     id: this.generateUniqueId(),
-  //     amount: 300,
-  //     create_at : Date.now(),
-  //     status: true
-  //   },
-  //    {
-  //     id: this.generateUniqueId(),
-  //     amount: 300,
-  //     create_at : Date.now(),
-  //     status: false
-  //   },
-  // ]
-
-  public coupons = this.database.getCoupons();
-  // Génère un identifiant unique sous forme de chaîne
+  // public coupons = this.database.getCoupons();
+  public coupons = this.localStorage.getAll();
   generateUniqueId(): string {
     return 'id-' + Math.random().toString(36).substr(2, 9) + '-' + Date.now();
   }
   constructor(
     private alertController: AlertController, 
     private translate: TranslateService,
-    private database : Database
+    private localStorage : LocalStorage,
+    private toastCtrl: ToastController
   ) {}
 
-  async presentAlert() {
+  async presentAlert(id : string) {
     const alert = await this.alertController.create({
       message: this.translate.instant('history.confirmMessage'),
       buttons: 
@@ -97,8 +79,17 @@ export class HistoryPage implements OnInit {
         {
           text: this.translate.instant('history.ok'),
           role: 'confirm',
-          handler: () => {
-            console.log("element supprimé");
+          handler: async () => {
+            this.localStorage.delete(id);
+            this.coupons = this.localStorage.getAll(); //Mettre à jour la liste des coupons
+            const toast = await this.toastCtrl.create({
+              message: this.translate.instant('history.success'),
+              duration: 2000, // 2 secondes
+              position: 'middle',
+              color: 'light',
+              icon : 'checkmark-circle'
+            });
+            toast.present();
           },
         },
       ],

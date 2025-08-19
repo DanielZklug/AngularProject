@@ -24,6 +24,7 @@
     "@capacitor-community/sqlite": "^7.0.1",
     "@capacitor/android": "7.4.2",
     "@capacitor/app": "7.0.2",
+    "@capacitor/barcode-scanner": "^2.0.3",
     "@capacitor/core": "7.4.2",
     "@capacitor/haptics": "7.0.2",
     "@capacitor/keyboard": "7.0.2",

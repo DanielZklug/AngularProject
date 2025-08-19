@@ -16,21 +16,26 @@
 
   <ion-card>
     <ion-card-header>
-    <ion-input 
-      [label]="'coupon.amount' | translate" 
-      label-placement="floating" 
-      type="number" fill="outline" 
-      [placeholder]="'coupon.placeholder'| translate" 
+    <ion-input
+      [label]="'coupon.amount' | translate"
+      label-placement="floating"
+      type="number"
+      fill="outline"
+      [placeholder]="'coupon.placeholder' | translate"
       [helperText]="'coupon.helperText' | translate"
-      [errorText]="'coupon.errorText' | translate"
+      [errorText]="amountInput?.invalid && amountInput?.touched ? ('coupon.errorText' | translate) : null"
       [(ngModel)]="couponAmount"
+      #amountInput="ngModel"
+      name="couponAmount"
+      required
+      min="1"
+      pattern="^[0-9]+$"
       inputmode="numeric"
-      pattern="[\p{N}]"
-      [min]="1"
-    ></ion-input>
+    >
+    </ion-input>
     </ion-card-header>
     <ion-card-content>
-      <ion-button expand="block" (click)="createCoupon()">
+      <ion-button id="open-toast" expand="block" (click)="createCoupon()">
         <ion-text>{{'coupon.save' | translate}}</ion-text>
       </ion-button>
     </ion-card-content>

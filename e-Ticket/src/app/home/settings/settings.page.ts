@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { 
   IonButtons,
   IonContent, 
@@ -44,19 +44,17 @@ export class SettingsPage implements OnInit {
   sectionName = 'Paramètres';
   paletteToggle = false;
   theme = this.paletteToggle ? 'ligth' : 'dark'
+  // Use matchMedia to check the user preference
+  prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
-  constructor() { }
+  constructor(private translate: TranslateService) { }
 
   ngOnInit() {
-    // Use matchMedia to check the user preference
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-
-    // Initialize the dark palette based on the initial
     // value of the prefers-color-scheme media query
-    this.initializeDarkPalette(prefersDark.matches);
+    this.initializeDarkPalette(this.prefersDark.matches);
 
     // Listen for changes to the prefers-color-scheme media query
-    prefersDark.addEventListener('change', (mediaQuery) => this.initializeDarkPalette(mediaQuery.matches));
+    this.prefersDark.addEventListener('change', (mediaQuery) => this.initializeDarkPalette(mediaQuery.matches));
   }
   
 
@@ -74,6 +72,11 @@ export class SettingsPage implements OnInit {
   // Add or remove the "ion-palette-dark" class on the html element
   toggleDarkPalette(shouldAdd: boolean) {
     document.documentElement.classList.toggle('ion-palette-dark', shouldAdd);
+  }
+
+  handleChange(event: CustomEvent) {
+    const lang = event.detail.value; // exemple: 'fr' ou 'en'
+    this.translate.use(lang);
   }
 
 }

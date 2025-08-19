@@ -29,3 +29,9 @@ ion-list{
   color: var(--ion-color-medium);
   align-self: flex-end;
 }
+.empty-screen{
+  margin-top: 10rem;
+  ion-icon{
+    font-size: 10rem;
+  }
+}

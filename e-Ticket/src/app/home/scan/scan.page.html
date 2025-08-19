@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="#"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'scan.title' | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">scan</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+    <ion-toast 
+  [isOpen]="isToast"
+  [message]="toastData?.Message"
+  [position]="'bottom'"
+  [color]="toastData?.color"
+  [duration]="3000"
+  (didDismiss)="isToast = !isToast"
+  ></ion-toast>
+</ion-content>

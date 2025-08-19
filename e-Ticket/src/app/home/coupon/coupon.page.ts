@@ -13,10 +13,13 @@ import {
   IonText, 
   IonTitle, 
   IonToolbar,
-  IonBackButton
+  IonBackButton,
 } from '@ionic/angular/standalone';
-import { TranslateModule } from '@ngx-translate/core';
-import { Database } from 'src/app/services/database';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { Database } from 'src/app/services/database/database';
+import { ToastController } from '@ionic/angular';
+import { LocalStorage, Coupon } from 'src/app/services/localstorage/local-storage';
+
 
 @Component({
   selector: 'app-coupon',
@@ -44,13 +47,42 @@ import { Database } from 'src/app/services/database';
 export class CouponPage implements OnInit {
   public couponAmount = 0
 
-  constructor(private database : Database) { }
+  constructor(
+    private localStorage : LocalStorage,
+    private toastCtrl: ToastController,
+    private translate : TranslateService
+  ) { }
+
+  // parseInt(){
+  //   this.couponAmount = parseInt(this.couponAmount.toString());
+  // }
+
+  // async createCoupon(){
+  //   await this.database.addCoupon(this.couponAmount);
+  //   this.couponAmount = 0;
+  // }
 
   async createCoupon(){
-    await this.database.addCoupon(this.couponAmount);
+    const newCoupon: Coupon = {
+      id: 'ABC' + Math.floor(Math.random() * 1000),
+      amount: parseInt(this.couponAmount.toString()),
+      create_at: Date.now(),
+      status : true
+    };
+
+    this.localStorage.save(newCoupon);
+
+    const toast = await this.toastCtrl.create({
+      message: this.translate.instant('coupon.success'),
+      duration: 2000, // 2 secondes
+      position: 'middle',
+      color: 'light',
+      icon : 'checkmark-circle'
+    });
+    toast.present();
+
     this.couponAmount = 0;
   }
-
   ngOnInit() {
   }
 

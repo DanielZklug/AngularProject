@@ -8,9 +8,10 @@ import {
   personCircleOutline,
   scanOutline,
   ticketOutline,
-  listOutline
+  listOutline,
+  checkmarkCircle
 } from "ionicons/icons";
-import { Database } from './services/database';
+import { Database } from './services/database/database';
 
 @Component({
   selector: 'app-root',
@@ -34,7 +35,8 @@ export class AppComponent {
       personCircleOutline,
       scanOutline,
       ticketOutline,
-      listOutline
+      listOutline,
+      checkmarkCircle
     })
   }
 }

@@ -4,7 +4,8 @@
     "yourOptions": "Your options",
     "couponScan": "Coupon Scan",
     "newCoupon": "New Coupon",
-    "history": "History"
+    "history": "History",
+    "myCoupon" : "My Coupons"
   },
   "settings":{
     "title": "Settings",
@@ -12,7 +13,9 @@
     "darkMode": "Dark Mode",
     "appearance" : "Appearance",
     "french" : "French",
-    "english" : "English"
+    "english" : "English",
+    "cancel": "Cancel",
+    "ok": "Ok"
   },
   "coupon": {
     "new": "New Coupon",
@@ -20,7 +23,8 @@
     "placeholder" : "Enter coupon amount",
     "helperText": "Please enter the amount greather than 0",
     "errorText": "Please enter a valid amount",
-    "save": "Save"
+    "save": "Save",
+    "success" : "Coupon created successfully 🎉"
   },
   "history":{
     "title" : "History",
@@ -30,6 +34,11 @@
     "delete" : "Delete",
     "confirmMessage" : "Are you sure you want to delete this coupon?",
     "cancel" : "Cancel",
-    "ok" : "Ok"
+    "ok" : "Ok",
+    "success" : "Coupon deleted successfully 🎉",
+    "empty": "No coupon created yet"
+  },
+  "scan":{
+    "title" : "Scan"
   }
 }
