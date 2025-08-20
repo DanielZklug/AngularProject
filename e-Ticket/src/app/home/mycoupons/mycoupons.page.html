@@ -32,7 +32,7 @@
                 <p>{{item.create_at | date:'medium':undefined:('history.lang' | translate)}}</p>
               </div>
             </ion-label>
-            <ion-button slot="end" fill="clear" color="white" (click)="getBarcodeData(item)">
+            <ion-button slot="end" fill="clear" color="white" (click)="activeQR(item.id)">
               <ion-icon slot="icon-only" name="barcode-outline"></ion-icon>
             </ion-button>
           </ion-item>
@@ -48,25 +48,30 @@
       </div>
     }
   </ion-list>
-  <ion-modal #barcode_modal 
-    [isOpen]="showBarcode" 
-    (didDismiss)="showBarcode = false"
-    [breakpoints]="[.3, .5, .9]"
-    [initialBreakpoint]=".5">
-    <ng-template>
-      <ion-header class="ion-no-border">
-        <ion-toolbar>
-          <ion-buttons slot="end">
-            <ion-button (click)="barcode_modal.dismiss()" color="white">
-              <ion-icon name="close-outline"></ion-icon>
-            </ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
+  
+  <ion-modal
+  #qrcode_modal
+  [isOpen]="isQrPay"
+  (didDismiss)="isQrPay = false"
+  >
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="end">
+          <ion-button (click)="qrcode_modal.dismiss()">
+            <ion-icon name="close-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
 
-      <ion-content>
-        <img id="barcode" class="ion-margin-top">
-      </ion-content>
-    </ng-template>
+    <ion-content>
+      <div class="ion-margin" align="center">
+        <ion-label>Scan QR Code</ion-label>
+        <br>
+        <qrcode [qrdata]="jsonData" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+      </div>
+    </ion-content>
+  </ng-template>
   </ion-modal>
 </ion-content>

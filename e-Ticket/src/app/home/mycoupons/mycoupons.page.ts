@@ -26,7 +26,7 @@ import {
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LocalStorage ,Coupon } from 'src/app/services/localstorage/local-storage';
 import { ToastController } from '@ionic/angular';
-import { Barcode } from 'src/app/services/barcode/barcode';
+import { QRCodeComponent } from 'angularx-qrcode';
 
 @Component({
   selector: 'app-mycoupons',
@@ -53,52 +53,22 @@ import { Barcode } from 'src/app/services/barcode/barcode';
     IonModal,
     IonButton,
     IonSegment,
-    IonSegmentButton
+    IonSegmentButton,
+    QRCodeComponent
   ]
 })
-export class MycouponsPage implements OnInit{
-  showBarcode = this.barcode.showBarcode;
+export class MycouponsPage{
   public currency : string = "fr";
+  isQrPay = false;
+  jsonData = '';
 
-  public coupons : Coupon[] = [
-    {
-      id: this.localStorage.generateUniqueId(),
-      amount: 500,
-      create_at: Date.now(),
-      status : true
-    },
-    {
-      id: this.localStorage.generateUniqueId(),
-      amount: 50,
-      create_at: Date.now(),
-      status : true
-    },
-    {
-      id: this.localStorage.generateUniqueId(),
-      amount: 150,
-      create_at: Date.now(),
-      status : true
-    },
-    {
-      id: this.localStorage.generateUniqueId(),
-      amount: 550,
-      create_at: Date.now(),
-      status : true
-    },
-    {
-      id: this.localStorage.generateUniqueId(),
-      amount: 300,
-      create_at: Date.now(),
-      status : true
-    }
-  ]
+  public coupons = this.localStorage.getAll(this.localStorage.secondStorageKey)
 
   constructor(
     private translate: TranslateService, 
     private localStorage : LocalStorage,
     private alertController: AlertController,
-    private toastCtrl: ToastController,
-    private barcode : Barcode
+    private toastCtrl: ToastController
   ) { }
 
   async presentAlert(id : string) {
@@ -116,8 +86,8 @@ export class MycouponsPage implements OnInit{
           text: this.translate.instant('history.ok'),
           role: 'confirm',
           handler: async () => {
-            this.localStorage.delete(id);
-            this.coupons = this.localStorage.getAll(); //Mettre à jour la liste des coupons
+            this.localStorage.delete(id,this.localStorage.secondStorageKey);
+            this.coupons = this.localStorage.getAll(this.localStorage.secondStorageKey); //Mettre à jour la liste des coupons
             const toast = await this.toastCtrl.create({
               message: this.translate.instant('history.success'),
               duration: 2000, // 2 secondes
@@ -134,16 +104,8 @@ export class MycouponsPage implements OnInit{
     await alert.present();
   }
 
-  ngOnInit() {
-    this.barcode.items = [...this.coupons];
-  }
-
-  getBarcodeData(item : any){
-    this.barcode.itemsModel = {...item};
-    this.showBarcode = true;
-
-    setTimeout(()=>{
-      this.barcode.getBarcode(item.id);
-    }, 500)
+  activeQR(item: any){
+    this.isQrPay = true;
+    return this.jsonData = item;
   }
 }

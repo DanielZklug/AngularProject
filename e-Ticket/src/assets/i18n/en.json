@@ -45,7 +45,8 @@
     "full": "Full Scan",
     "id": "ID Scan",
     "fullDescription": "Retrieves all ticket information",
-    "idDescription": "Retrieves only the ticket ID"
+    "idDescription": "Retrieves only the ticket ID",
+    "success" : "Coupon created successfully 🎉"
   },
   "mycoupons":{
     "title" : "My Coupons"

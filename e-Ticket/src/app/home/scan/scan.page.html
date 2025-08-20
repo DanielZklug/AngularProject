@@ -17,7 +17,7 @@
   <ion-row class="ion-margin">
     @for (item of scans; track $index) {
       <ion-col size="6" class="ion-text-center">
-        <ion-card color="light">
+        <ion-card color="light" (click)="item.color === 'warning' ? scanCam() : null">
           <ion-thumbnail [style.background]="item.thumbnail">
             <ion-icon [name]="item.icon" [color]="item.color"></ion-icon>
           </ion-thumbnail>
@@ -29,10 +29,11 @@
 
     <ion-toast 
   [isOpen]="isToast"
-  [message]="toastData?.Message"
+  [message]="toastData?.message | translate"
   [position]="'bottom'"
   [color]="toastData?.color"
-  [duration]="3000"
+  icon="checkmark-circle"
+  [duration]="2000"
   (didDismiss)="isToast = !isToast"
   ></ion-toast>
 </ion-content>

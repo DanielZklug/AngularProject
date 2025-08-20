@@ -1,8 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Scan } from 'src/app/services/scan/scan';
+import { LocalStorage } from 'src/app/services/localstorage/local-storage';
 import { Subscription } from 'rxjs';
 import { 
   IonContent, 
@@ -53,10 +54,10 @@ export class ScanPage implements OnInit {
 
   public scans = [
     {
-      thumbnail : 'rgba(240, 94, 112, 0.2)',
+      thumbnail : 'rgba(255, 152, 0, 0.2)',
       icon : 'scan-circle-outline',
       label : 'scan.full',
-      color : 'danger',
+      color : 'warning',
     },
     {
       thumbnail : 'rgba(76, 175, 80, 0.2)',
@@ -66,15 +67,19 @@ export class ScanPage implements OnInit {
     }
   ]
 
-  constructor() { }
+  constructor(private localStorage : LocalStorage,private translate : TranslateService) { }
 
   ngOnInit() {
-    // this.scanQrcode();
-    // this.scanSub = this.scanService.scan.subscribe({
-    //   next : (scan) => {
-    //     console.log(scan);
-    //   }
-    // })
+    
+  }
+
+  scanCam(){
+    this.scanQrcode();
+    this.scanSub = this.scanService.scan.subscribe({
+      next : (scan) => {
+        console.log(scan)
+      }
+    })
   }
 
   public toast(params?:number) {
@@ -99,16 +104,15 @@ export class ScanPage implements OnInit {
         this.isToast = !this.isToast;
         this.toast(params);
         throw(this.toastData.message);
-      }
-      if (params) {
+      }else{
+        this.localStorage.save(JSON.parse(code),this.localStorage.secondStorageKey)
         this.isToast = !this.isToast;
         this.toastData = {
-          color : "success",
-          message : "Payment sucessful"
+          color : "light",
+          message : "scan.success"
         }
       }
-      console.log(code);
-         } catch (error) {
+    } catch (error) {
       console.log(error)
     }
   }

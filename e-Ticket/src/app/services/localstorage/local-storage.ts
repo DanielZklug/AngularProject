@@ -11,13 +11,14 @@ export interface Coupon {
   providedIn: 'root'
 })
 export class LocalStorage {
-  private storageKey = 'coupons';
+  firstStorageKey = 'coupons';
+  secondStorageKey = 'mycoupons';
 
   constructor() {}
 
   /** 🔹 Récupérer tous les coupons */
-  getAll(): Coupon[] {
-    const data = localStorage.getItem(this.storageKey);
+  getAll(storageKey : string): Coupon[] {
+    const data = localStorage.getItem(storageKey);
     return data ? JSON.parse(data) : [];
   }
 
@@ -26,29 +27,29 @@ export class LocalStorage {
   }
 
   /** 🔹 Sauvegarder un nouveau coupon */
-  save(coupon: Coupon): void {
-    const coupons = this.getAll();
+  save(coupon: Coupon,storageKey : string): void {
+    const coupons = this.getAll(storageKey);
 
     // Vérifier si le code existe déjà
     const exists = coupons.some(c => c.id === coupon.id);
     if (!exists) {
       coupons.push(coupon);
-      localStorage.setItem(this.storageKey, JSON.stringify(coupons));
+      localStorage.setItem(storageKey, JSON.stringify(coupons));
     } else {
       console.warn('Coupon déjà existant : ' + coupon.id);
     }
   }
 
   /** 🔹 Supprimer un coupon par code */
-  delete(code: string): void {
-    let coupons = this.getAll();
+  delete(code: string,storageKey: string): void {
+    let coupons = this.getAll(storageKey);
     coupons = coupons.filter(c => c.id !== code);
-    localStorage.setItem(this.storageKey, JSON.stringify(coupons));
+    localStorage.setItem(storageKey, JSON.stringify(coupons));
   }
 
   /** 🔹 Vider tous les coupons */
   clear(): void {
-    localStorage.removeItem(this.storageKey);
+    localStorage.removeItem(this.firstStorageKey);
   }
 
 }

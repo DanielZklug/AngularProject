@@ -72,7 +72,7 @@ export class CouponPage implements OnInit {
       status : true
     };
 
-    this.localStorage.save(newCoupon);
+    this.localStorage.save(newCoupon,this.localStorage.firstStorageKey);
 
     const toast = await this.toastCtrl.create({
       message: this.translate.instant('coupon.success'),

@@ -25,6 +25,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 // import { Database } from 'src/app/services/database';
 import { LocalStorage } from 'src/app/services/localstorage/local-storage';
 import { ToastController } from '@ionic/angular';
+import { QRCodeComponent } from 'angularx-qrcode';
 
 @Component({
   selector: 'app-history',
@@ -50,22 +51,23 @@ import { ToastController } from '@ionic/angular';
     TranslateModule,
     IonIcon,
     IonButton,
-    IonModal
+    IonModal,
+    QRCodeComponent
 ]
 })
 
-export class HistoryPage implements OnInit {
-  showBarcode = this.barcode.showBarcode;
+export class HistoryPage{
   public currency : string = "fr";
+  isQrPay = false;
+  jsonData = '';
 
   // public coupons = this.database.getCoupons();
-  public coupons = this.localStorage.getAll();
+  public coupons = this.localStorage.getAll(this.localStorage.firstStorageKey);
   constructor(
     private alertController: AlertController, 
     private translate: TranslateService,
     private localStorage : LocalStorage,
     private toastCtrl: ToastController,
-    private barcode : Barcode
   ) {}
 
   async presentAlert(id : string) {
@@ -83,8 +85,8 @@ export class HistoryPage implements OnInit {
           text: this.translate.instant('history.ok'),
           role: 'confirm',
           handler: async () => {
-            this.localStorage.delete(id);
-            this.coupons = this.localStorage.getAll(); //Mettre à jour la liste des coupons
+            this.localStorage.delete(id,this.localStorage.firstStorageKey);
+            this.coupons = this.localStorage.getAll(this.localStorage.firstStorageKey); //Mettre à jour la liste des coupons
             const toast = await this.toastCtrl.create({
               message: this.translate.instant('history.success'),
               duration: 2000, // 2 secondes
@@ -101,16 +103,8 @@ export class HistoryPage implements OnInit {
     await alert.present();
   }
 
-  ngOnInit() {
-    this.barcode.items = [...this.coupons];
-  }
-
-  getBarcodeData(item : any){
-    this.barcode.itemsModel = {...item};
-    this.showBarcode = true;
-
-    setTimeout(()=>{
-      this.barcode.getBarcode(item.id);
-    }, 500)
+  activeQR(item: any){
+    this.isQrPay = true;
+    return this.jsonData = JSON.stringify(item);
   }
 }

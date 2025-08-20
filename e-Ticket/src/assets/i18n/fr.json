@@ -48,7 +48,8 @@
     "full": "Scan Complet",
     "id": "Scan Identifiant",
     "fullDescription": "Récupère toutes les informations du ticket",
-    "idDescription": "Récupère uniquement l'ID du ticket"
+    "idDescription": "Récupère uniquement l'ID du ticket",
+    "success" : "Coupon créé avec succès 🎉"
   },
   "mycoupons":{
     "title" : "Mes Coupons"

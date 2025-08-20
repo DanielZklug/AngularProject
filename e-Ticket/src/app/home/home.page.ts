@@ -53,7 +53,8 @@ import { LocalStorage } from '../services/localstorage/local-storage';
 })
 export class HomePage{
   public appName: string = "e-Ticket";
-  public nbrCoupons = this.localStorage.getAll().length
+  public nbrCoupons = this.localStorage.getAll(this.localStorage.firstStorageKey).length
+  public nbrMyCoupons = this.localStorage.getAll(this.localStorage.secondStorageKey).length
   
 
   public insights = [
@@ -91,7 +92,8 @@ export class HomePage{
   handleRefresh(event: RefresherCustomEvent) {
     setTimeout(() => {
       // Any calls to load data go here
-      this.nbrCoupons = this.localStorage.getAll().length
+      this.nbrCoupons = this.localStorage.getAll(this.localStorage.firstStorageKey).length
+      this.nbrMyCoupons = this.localStorage.getAll(this.localStorage.secondStorageKey).length
       event.target.complete();
     }, 2000);
   }
