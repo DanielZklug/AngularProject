@@ -2,24 +2,24 @@
   <ion-toolbar>
     <ion-title>{{'history.title' | translate}}</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
+      <ion-back-button [text]="'home.backButton' | translate" defaultHref="/home"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-list>
-    @if(coupons.length > 0){
-      @for (item of coupons; track $index) {
+    @if(couponsTable.length > 0){
+      @for (item of couponsTable; track $index) {
         <ion-item-sliding>
           <ion-item>
             <ion-label class="coupon-label">
               <div class="coupon-header">
-                <span class="coupon-title">Coupon</span>
-                <ion-text [color]="item.status ? 'success' : 'danger'" class="coupon-status">{{item.status ? ('history.active' | translate) : ('history.used' | translate)}}</ion-text>
+                <span class="coupon-title">Coupon  {{item.name !== '' ? `${'history.text' | translate} ${item.name}` : ''}}</span>
+                <ion-text [color]="item.status === '1' ? 'success' : 'danger'" class="coupon-status">{{item.status === '1' ? ('history.active' | translate) : ('history.used' | translate)}}</ion-text>
               </div>
               <div class="coupon-price">
-                <ion-text color="primary">{{item.amount}} {{currency}}</ion-text>
+                <ion-text color="primary">{{item.amount}} {{couponCurrency}}</ion-text>
               </div>
               <div class="coupon-details">
                 <p>{{item.create_at | date:'medium':undefined:('history.lang' | translate)}}</p>
@@ -29,7 +29,6 @@
               <ion-icon slot="icon-only" name="barcode-outline"></ion-icon>
             </ion-button>
           </ion-item>
-
           <ion-item-options>
             <ion-item-option  (click)="presentAlert(item.id)" color="danger">{{'history.delete' | translate}}</ion-item-option>
           </ion-item-options>
@@ -45,8 +44,8 @@
 
   <ion-modal
   #qrcode_modal
-  [isOpen]="isQrPay"
-  (didDismiss)="isQrPay = false"
+  [isOpen]="couponQr"
+  (didDismiss)="couponQr = false"
   >
   <ng-template>
     <ion-header>
@@ -63,7 +62,7 @@
       <div class="ion-margin" align="center">
         <ion-label>Scan QR Code</ion-label>
         <br>
-        <qrcode [qrdata]="jsonData" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+        <qrcode [qrdata]="couponQrJsonData" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
       </div>
     </ion-content>
   </ng-template>

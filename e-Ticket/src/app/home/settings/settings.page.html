@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button default-href="#"></ion-back-button>
+      <ion-back-button [text]="'home.backButton' | translate" default-href="#"></ion-back-button>
     </ion-buttons>
     <ion-title>{{'settings.title' | translate}}</ion-title>
   </ion-toolbar>
@@ -11,7 +11,7 @@
   <ion-list-header>{{'settings.appearance' | translate}}</ion-list-header>
   <ion-list [inset]="true">
     <ion-item>
-      <ion-toggle [(ngModel)]="paletteToggle" (ionChange)="toggleChange($event)" justify="space-between"
+      <ion-toggle [(ngModel)]="themeToggle" (ionChange)="toggleChange($event)" justify="space-between"
         >{{'settings.darkMode' | translate}}</ion-toggle
       >
     </ion-item>
@@ -24,6 +24,14 @@
         <ion-select-option value="fr">{{'settings.french' | translate}}</ion-select-option>
         <ion-select-option value="en">{{'settings.english' | translate}}</ion-select-option>
       </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-list-header>Option de suppression</ion-list-header>
+  <ion-list [inset]="true">
+    <ion-item>
+      <ion-toggle justify="space-between"
+        >Supprimer les coupons utilisés</ion-toggle
+      >
     </ion-item>
   </ion-list>
 </ion-content>

@@ -1,55 +1,74 @@
 import { Injectable } from '@angular/core';
+import { Coupon } from '../variables';
 
-export interface Coupon {
-  id: string;
-  amount: number;
-  create_at: number;
-  status: boolean;
-}
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocalStorage {
-  firstStorageKey = 'coupons';
-  secondStorageKey = 'mycoupons';
+  private firstStorageKey = 'coupons';
+  private secondStorageKey = 'mycoupons';
 
   constructor() {}
 
-  /** 🔹 Récupérer tous les coupons */
-  getAll(storageKey : string): Coupon[] {
-    const data = localStorage.getItem(storageKey);
+  getCoupons(): Coupon[] {
+    const data = localStorage.getItem(this.firstStorageKey);
     return data ? JSON.parse(data) : [];
   }
 
-  generateUniqueId(): string {
-    return 'id-' + Math.random().toString(13).substr(2, 9) + '-' + Date.now();
+  getMyCoupons(): Coupon[] {
+    const data = localStorage.getItem(this.secondStorageKey);
+    return data ? JSON.parse(data) : [];
   }
 
-  /** 🔹 Sauvegarder un nouveau coupon */
-  save(coupon: Coupon,storageKey : string): void {
-    const coupons = this.getAll(storageKey);
-
-    // Vérifier si le code existe déjà
-    const exists = coupons.some(c => c.id === coupon.id);
-    if (!exists) {
-      coupons.push(coupon);
-      localStorage.setItem(storageKey, JSON.stringify(coupons));
-    } else {
-      console.warn('Coupon déjà existant : ' + coupon.id);
+  addCoupon(coupon: Coupon,storageKey : string): void{
+    if (storageKey === this.firstStorageKey) {
+      localStorage.setItem(storageKey, JSON.stringify(this.getCoupons().push(coupon)));
+    } else if(storageKey === this.secondStorageKey) {
+      localStorage.setItem(storageKey, JSON.stringify(this.getMyCoupons().push(coupon)));
+    }else{
+      console.warn('Error message')
     }
   }
 
-  /** 🔹 Supprimer un coupon par code */
-  delete(code: string,storageKey: string): void {
-    let coupons = this.getAll(storageKey);
-    coupons = coupons.filter(c => c.id !== code);
-    localStorage.setItem(storageKey, JSON.stringify(coupons));
+  deleteCoupon(idcoupon: string,storageKey: string): void {
+    if (storageKey === this.firstStorageKey) {
+      localStorage.setItem(storageKey, JSON.stringify(this.getCoupons().filter(c => c.idcoupon !== idcoupon)));
+    } else if(storageKey === this.secondStorageKey) {
+      localStorage.setItem(storageKey, JSON.stringify(this.getCoupons().filter(c => c.idcoupon !== idcoupon)));
+    }else{
+      console.warn('Error message')
+    }
   }
 
-  /** 🔹 Vider tous les coupons */
-  clear(): void {
-    localStorage.removeItem(this.firstStorageKey);
+  updateCoupon(idcoupon: string, storageKey : string){
+    if (storageKey === this.firstStorageKey) {
+      this.getCoupons().forEach(element => {
+        if (element.idcoupon = idcoupon) {
+          element.status = 0;
+        }
+      });
+    } else if(storageKey === this.secondStorageKey){
+      this.getMyCoupons().forEach(element => {
+        if (element.idcoupon = idcoupon) {
+          element.status = 0;
+        }
+      });
+    }else{
+      console.warn('Error message')
+    }
   }
 
+  // clear(): void {
+  //   localStorage.removeItem(this.firstStorageKey);
+  // }
+
+  
+  public get firstKey() : string {
+    return this.firstStorageKey
+  }
+  
+  public get secondKey() : string {
+    return this.secondStorageKey
+  }
 }

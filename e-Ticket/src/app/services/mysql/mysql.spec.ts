@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { Barcode } from './barcode';
+import { Mysql } from './mysql';
 
-describe('Barcode', () => {
-  let service: Barcode;
+describe('Mysql', () => {
+  let service: Mysql;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(Barcode);
+    service = TestBed.inject(Mysql);
   });
 
   it('should be created', () => {

@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>{{'coupon.new' | translate}}</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
+      <ion-back-button [text]="'home.backButton' | translate" defaultHref="/home"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -17,6 +17,21 @@
   <ion-card>
     <ion-card-header>
     <ion-input
+      [label]="'coupon.name' | translate"
+      label-placement="floating"
+      type="text"
+      fill="outline"
+      [placeholder]="'coupon.placeholderText' | translate"
+      [helperText]="'coupon.helper' | translate"
+      [(ngModel)]="name"
+      #nameInput="ngModel"
+      name="name"
+      required
+      maxlength="50"
+      [counter]="true"
+    >
+    </ion-input>
+    <ion-input
       [label]="'coupon.amount' | translate"
       label-placement="floating"
       type="number"
@@ -26,9 +41,9 @@
       [errorText]="(amountInput?.touched && !isMultipleOf25)
       ? ('coupon.errorText' | translate)
       : null"
-      [(ngModel)]="couponAmount"
+      [(ngModel)]="amount"
       #amountInput="ngModel"
-      name="couponAmount"
+      name="amount"
       required
       min="25"
       inputmode="numeric"

@@ -5,7 +5,8 @@
     "couponScan": "Scannez le coupon",
     "newCoupon": "Nouveau coupon",
     "history": "Historique",
-    "myCoupon" : "Mes Coupons"
+    "myCoupon" : "Mes Coupons",
+    "backButton" : "Retour"
   },
   "settings": {
     "title": "Paramètres",
@@ -24,15 +25,20 @@
     "new": "Nouveau coupon",
     "history": "Historique des coupons",
     "amount": "Montant",
+    "name" : "Nom",
     "placeholder": "Entrez le montant du coupon",
+    "placeholderText" : "Entrez le nom du coupon",
+    "helper" : "Votre nom ou le nom de votre établissement",
     "helperText": "Le montant doit être un multiple de 25",
     "errorText": "Veuillez entrer un montant valide",
     "save": "Enregistrer",
-    "success" : "Coupon créé avec succès 🎉"
+    "success" : "Coupon créé avec succès 🎉",
+    "error" : "Échec de la création du coupon ❌"
   },
   "history":{
     "title" : "Historique",
     "coupon": "Coupon",
+    "text" : "généré par",
     "active" : "Actif",
     "used" : "Utilisé",
     "delete" : "Supprimer",
@@ -40,6 +46,7 @@
     "cancel" : "Annuler",
     "ok" : "OK",
     "success" : "Coupon supprimé avec succès 🎉",
+    "error" : "Échec de la suppression du coupon ❌",
     "empty": "Aucun coupon créé pour le moment",
     "lang" : "fr"
   },

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { 
   IonHeader, 
@@ -23,6 +23,7 @@ import {
 } from '@ionic/angular/standalone';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LocalStorage } from '../services/localstorage/local-storage';
+import { Mysql } from '../services/mysql/mysql';
 
 @Component({
   selector: 'app-home',
@@ -51,13 +52,29 @@ import { LocalStorage } from '../services/localstorage/local-storage';
     IonRefresherContent
   ],
 })
-export class HomePage{
-  public appName: string = "e-Ticket";
-  public nbrCoupons = this.localStorage.getAll(this.localStorage.firstStorageKey).length
-  public nbrMyCoupons = this.localStorage.getAll(this.localStorage.secondStorageKey).length
-  
+export class HomePage implements OnInit{
+  private appName: string = "e-Ticket";
+  private nbrCoupons = 0
+  private nbrMyCoupons = 0;
 
-  public insights = [
+  public refresh(){
+    let nbrCoupons : any = []
+    let nbrMyCoupons : any = []
+    this.mysql.getCoupons().subscribe(coupons => {
+      nbrCoupons = coupons;
+      this.nbrCoupons = nbrCoupons.length;
+    });
+    this.mysql.getMyCoupons().subscribe(coupons => {
+      nbrMyCoupons = coupons;
+      this.nbrMyCoupons = nbrMyCoupons.length;
+    });
+  }
+
+  ngOnInit(): void {
+    this.refresh()
+  }
+
+  private insights = [
     {
       thumbnail : 'rgba(240, 94, 112, 0.2)',
       icon : 'scan-outline',
@@ -87,15 +104,31 @@ export class HomePage{
       route : 'mycoupons',
     }
   ]
-  constructor(private translate: TranslateService,private localStorage : LocalStorage,) {}
+  constructor(private translate: TranslateService,private localStorage : LocalStorage, private mysql : Mysql) {}
 
   handleRefresh(event: RefresherCustomEvent) {
     setTimeout(() => {
       // Any calls to load data go here
-      this.nbrCoupons = this.localStorage.getAll(this.localStorage.firstStorageKey).length
-      this.nbrMyCoupons = this.localStorage.getAll(this.localStorage.secondStorageKey).length
+      this.refresh()
       event.target.complete();
     }, 2000);
   }
+  
+  public get app() : string {
+    return this.appName
+  }
+  
+  public get insightsTable() : any[]  {
+    return this.insights
+  }
+  
+  public get nbrCouponsHome() : number {
+    return this.nbrCoupons
+  }
 
+  
+  public get nbrMyCouponsHome() : number {
+    return this.nbrMyCoupons
+  }
+  
 }

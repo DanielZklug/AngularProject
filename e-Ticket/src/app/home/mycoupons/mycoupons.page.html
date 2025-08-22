@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button default-href="#"></ion-back-button>
+      <ion-back-button [text]="'home.backButton' | translate" default-href="#"></ion-back-button>
     </ion-buttons>
     <ion-segment [scrollable]="true" value="all">
       <ion-segment-button value="all">
@@ -16,8 +16,8 @@
 
 <ion-content>
   <ion-list class="ion-margin-top">
-    @if(coupons.length > 0){
-      @for (item of coupons; track $index) {
+    @if(couponsTable.length > 0){
+      @for (item of couponsTable; track $index) {
         <ion-item-sliding>
           <ion-item>
             <ion-label class="coupon-label">
@@ -26,13 +26,13 @@
                 <ion-text [color]="item.status ? 'success' : 'danger'" class="coupon-status">{{item.status ? ('history.active' | translate) : ('history.used' | translate)}}</ion-text>
               </div>
               <div class="coupon-price">
-                <ion-text color="primary">{{item.amount}} {{currency}}</ion-text>
+                <ion-text color="primary">{{item.amount}} {{couponCurrency}}</ion-text>
               </div>
               <div class="coupon-details">
                 <p>{{item.create_at | date:'medium':undefined:('history.lang' | translate)}}</p>
               </div>
             </ion-label>
-            <ion-button slot="end" fill="clear" color="white" (click)="activeQR(item.id)">
+            <ion-button slot="end" fill="clear" color="white" (click)="activeQR(item.idcoupon)">
               <ion-icon slot="icon-only" name="barcode-outline"></ion-icon>
             </ion-button>
           </ion-item>
@@ -51,8 +51,8 @@
   
   <ion-modal
   #qrcode_modal
-  [isOpen]="isQrPay"
-  (didDismiss)="isQrPay = false"
+  [isOpen]="couponQr"
+  (didDismiss)="couponQr = false"
   >
   <ng-template>
     <ion-header>
@@ -69,7 +69,7 @@
       <div class="ion-margin" align="center">
         <ion-label>Scan QR Code</ion-label>
         <br>
-        <qrcode [qrdata]="jsonData" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+        <qrcode [qrdata]="couponQrJsonData" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
       </div>
     </ion-content>
   </ng-template>

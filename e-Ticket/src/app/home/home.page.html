@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-     <h1>{{appName}}</h1>
+     <h1>{{app}}</h1>
     </ion-title>
     <ion-buttons slot="end">
       <ion-button routerLink="settings">
@@ -38,12 +38,12 @@
   </ion-list-header>
 
   <ion-row class="ion-margin">
-    @for (item of insights; track $index) {
+    @for (item of insightsTable; track $index) {
       <ion-col size="6" class="ion-text-center" [routerLink]="item.route">
         <ion-card color="light">
           <ion-thumbnail [style.background]="item.thumbnail">
             @if (item.route === 'history' || item.route === 'mycoupons') {
-              <ion-badge>{{item.route === 'history' ? nbrCoupons : nbrMyCoupons}}</ion-badge>
+              <ion-badge>{{item.route === 'history' ? nbrCouponsHome : nbrMyCouponsHome}}</ion-badge>
             }
             <ion-icon [name]="item.icon" [color]="item.color"></ion-icon>
           </ion-thumbnail>

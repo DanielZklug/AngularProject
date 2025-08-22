@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button default-href="#"></ion-back-button>
+      <ion-back-button [text]="'home.backButton' | translate" default-href="#"></ion-back-button>
     </ion-buttons>
     <ion-title>{{'scan.title' | translate}}</ion-title>
   </ion-toolbar>
@@ -15,9 +15,9 @@
   </ion-header>
 
   <ion-row class="ion-margin">
-    @for (item of scans; track $index) {
+    @for (item of scansTable; track $index) {
       <ion-col size="6" class="ion-text-center">
-        <ion-card color="light" (click)="item.color === 'warning' ? scanCam() : null">
+        <ion-card color="light" (click)="item.color === 'warning' ? scanCoupon() : scanId()">
           <ion-thumbnail [style.background]="item.thumbnail">
             <ion-icon [name]="item.icon" [color]="item.color"></ion-icon>
           </ion-thumbnail>
@@ -28,12 +28,12 @@
   </ion-row>
 
     <ion-toast 
-  [isOpen]="isToast"
-  [message]="toastData?.message | translate"
+  [isOpen]="ToastOpen"
+  [message]="toastdata?.message | translate"
   [position]="'bottom'"
-  [color]="toastData?.color"
+  [color]="toastdata?.color"
   icon="checkmark-circle"
   [duration]="2000"
-  (didDismiss)="isToast = !isToast"
+  (didDismiss)="toastopen = !ToastOpen"
   ></ion-toast>
 </ion-content>

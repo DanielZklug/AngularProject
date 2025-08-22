@@ -14,9 +14,10 @@ import {
   closeOutline,
   scanCircleOutline,
   scaleSharp,
-  scanCircleSharp
+  scanCircleSharp,
+  closeCircle
 } from "ionicons/icons";
-import { Database } from './services/database/database';
+import { Sqlite } from './services/sqlite/sqlite';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +26,7 @@ import { Database } from './services/database/database';
 })
 export class AppComponent {
   public appName: string = "e-Ticket";
-  constructor(translate : TranslateService, private database : Database) {
+  constructor(translate : TranslateService, private database : Sqlite) {
     this.addAllIcons();
     this.initApp();
   }
@@ -44,6 +45,7 @@ export class AppComponent {
       checkmarkCircle,
       barcodeOutline,
       closeOutline,
+      closeCircle,
       scanCircleOutline,
       scanCircleSharp
     })

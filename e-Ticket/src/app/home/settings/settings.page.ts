@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LocalStorage } from 'src/app/services/localstorage/local-storage';
+import { ToastController } from '@ionic/angular';
 import { 
   IonButtons,
   IonContent, 
@@ -14,7 +16,8 @@ import {
   IonToolbar,
   IonBackButton, 
   IonSelect,
-  IonSelectOption
+  IonSelectOption,
+  AlertController
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -37,17 +40,24 @@ import {
     IonBackButton,
     IonSelect,
     IonSelectOption,
-    TranslateModule
+    TranslateModule,
+
   ]
 })
 export class SettingsPage implements OnInit {
-  sectionName = 'Paramètres';
-  paletteToggle = false;
-  theme = this.paletteToggle ? 'ligth' : 'dark'
+  private delete = false;
+  private sectionName = 'Paramètres';
+  private paletteToggle = false;
+  private theme = this.paletteToggle ? 'ligth' : 'dark'
   // Use matchMedia to check the user preference
-  prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+  private prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
-  constructor(private translate: TranslateService) { }
+  constructor(
+    private translate: TranslateService,
+    private localstorage : LocalStorage,
+    private alertController: AlertController,
+    private toastCtrl: ToastController
+  ) { }
 
   ngOnInit() {
     // value of the prefers-color-scheme media query
@@ -63,6 +73,47 @@ export class SettingsPage implements OnInit {
     this.paletteToggle = isDark;
     this.toggleDarkPalette(isDark);
   }
+
+  // deleteOption(){
+  //   const storage = this.localstorage.getAll(this.localstorage.firstStorageKey);
+  //   storage.forEach(element => {
+  //     if (element.status === false) {
+  //       this.localstorage.delete(element.id,this.localstorage.firstStorageKey)
+  //     }
+  //   });
+  // }
+
+  // async presentAlert() {
+  //   const alert = await this.alertController.create({
+  //     message: 'Cette option supprime automatiquement les coupons utilisés , voulez vous vraiment l\'activée',
+  //     buttons: 
+  //     [
+  //       {
+  //         text: this.translate.instant('history.cancel'),
+  //         role: 'cancel',
+  //         handler: () => {
+  //         },
+  //       },
+  //       {
+  //         text: this.translate.instant('history.ok'),
+  //         role: 'confirm',
+  //         handler: async () => {
+  //           this.deleteOption();
+  //           const toast = await this.toastCtrl.create({
+  //             message: this.translate.instant('history.success'),
+  //             duration: 2000, // 2 secondes
+  //             position: 'middle',
+  //             color: 'light',
+  //             icon : 'checkmark-circle'
+  //           });
+  //           toast.present();
+  //         },
+  //       },
+  //     ],
+  //   });
+
+  //   await alert.present();
+  // }
 
   // Listen for the toggle check/uncheck to toggle the dark palette
   toggleChange(event: CustomEvent) {
@@ -81,4 +132,12 @@ export class SettingsPage implements OnInit {
     return lang;
   }
 
+  public get themeToggle() : boolean {
+    return this.paletteToggle;
+  }
+  
+  public set themeSettings(v : boolean) {
+    this.paletteToggle = v;
+  }
+  
 }
