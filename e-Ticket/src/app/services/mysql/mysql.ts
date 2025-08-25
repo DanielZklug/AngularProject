@@ -30,6 +30,10 @@ export class Mysql {
   }
 
   public autoDeleteCoupon() {
-    return this.http.delete(this.apiUrl + `autodelete.php`);
+    return this.http.delete(this.apiUrl + 'autodelete.php');
+  }
+
+  public filterCoupon(name : string) {
+    return this.http.get(this.apiUrl + `filter.php?name=${name}`);
   }
 }

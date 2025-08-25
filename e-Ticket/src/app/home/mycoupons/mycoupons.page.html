@@ -3,13 +3,19 @@
     <ion-buttons slot="start">
       <ion-back-button [text]="'home.backButton' | translate" default-href="#"></ion-back-button>
     </ion-buttons>
-    <ion-segment [scrollable]="true" value="all">
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-segment [scrollable]="true" (ionChange)="filter($event)" value="all">
       <ion-segment-button value="all">
-        <ion-label>All</ion-label>
+        <ion-label>{{'mycoupons.all' | translate}}</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="favorites">
-        <ion-label>Favorites</ion-label>
-      </ion-segment-button>
+      @if (couponsTable.length > 0) {
+        @for (item of createCategories(); track $index) {
+          <ion-segment-button [value]="item">
+            <ion-label>{{item}}</ion-label>
+          </ion-segment-button>
+        }
+      }
     </ion-segment>
   </ion-toolbar>
 </ion-header>
@@ -22,7 +28,7 @@
           <ion-item>
             <ion-label class="coupon-label">
               <div class="coupon-header">
-                <span class="coupon-title">Coupon</span>
+                <span class="coupon-title">Coupon {{item.name !== '' ? `${'history.text' | translate} ${item.name}` : ''}}</span>
                 <ion-text [color]="item.status ? 'success' : 'danger'" class="coupon-status">{{item.status ? ('history.active' | translate) : ('history.used' | translate)}}</ion-text>
               </div>
               <div class="coupon-price">
@@ -54,24 +60,24 @@
   [isOpen]="couponQr"
   (didDismiss)="couponQr = false"
   >
-  <ng-template>
-    <ion-header>
-      <ion-toolbar>
-        <ion-buttons slot="end">
-          <ion-button (click)="qrcode_modal.dismiss()">
-            <ion-icon name="close-outline"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="end">
+            <ion-button (click)="qrcode_modal.dismiss()">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
 
-    <ion-content>
-      <div class="ion-margin" align="center">
-        <ion-label>Scan QR Code</ion-label>
-        <br>
-        <qrcode [qrdata]="couponQrJsonData" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
-      </div>
-    </ion-content>
-  </ng-template>
+      <ion-content>
+        <div class="ion-margin" align="center">
+          <ion-label>Scan QR Code</ion-label>
+          <br>
+          <qrcode [qrdata]="couponQrJsonData" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+        </div>
+      </ion-content>
+    </ng-template>
   </ion-modal>
 </ion-content>

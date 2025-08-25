@@ -15,7 +15,9 @@ import {
   scanCircleOutline,
   scaleSharp,
   scanCircleSharp,
-  closeCircle
+  closeCircle,
+  help,
+  helpCircleOutline
 } from "ionicons/icons";
 import { Sqlite } from './services/sqlite/sqlite';
 
@@ -47,7 +49,8 @@ export class AppComponent {
       closeOutline,
       closeCircle,
       scanCircleOutline,
-      scanCircleSharp
+      scanCircleSharp,
+      helpCircleOutline
     })
   }
 }

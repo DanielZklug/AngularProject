@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Scan } from 'src/app/services/scan/scan';
-import { LocalStorage } from 'src/app/services/localstorage/local-storage';
 import { Subscription } from 'rxjs';
 import { 
   IonContent, 
@@ -22,6 +21,7 @@ import {
   ToastController
 } from '@ionic/angular/standalone';
 import { Mysql } from 'src/app/services/mysql/mysql';
+import { Sqlite } from 'src/app/services/sqlite/sqlite';
 
 @Component({
   selector: 'app-scan',
@@ -70,10 +70,10 @@ export class ScanPage implements OnInit {
   ]
 
   constructor(
-    private localStorage : LocalStorage,
     private translate : TranslateService, 
     private toastCtrl : ToastController,
-    private mysql : Mysql
+    private mysql : Mysql,
+    private sqlite : Sqlite
   ) { }
 
   ngOnInit() {
@@ -132,8 +132,9 @@ export class ScanPage implements OnInit {
         type : "mycoupons"
       }
       // const response = this.localStorage.addCoupon(newCoupon,this.localStorage.secondKey)
-      const response = await this.mysql.addCoupon(newCoupon).toPromise();
-      console.log('Coupon ajouté:', response);
+      // const response = await this.mysql.addCoupon(newCoupon).toPromise();
+      // console.log('Coupon ajouté:', response);
+      this.sqlite.addCoupon(newCoupon);
       const toast = await this.toastCtrl.create({
         message: this.translate.instant('coupon.success'),
         duration: 2000,
@@ -158,28 +159,49 @@ export class ScanPage implements OnInit {
   public async updateByQrcode(params?:number) {
     const code = await this.scanService.startScan(params);
     const updatedCoupon = { ...JSON.parse(code) };
-    this.mysql.updateCoupon(code, updatedCoupon).subscribe({
-      next: async () => {
-        const toast = await this.toastCtrl.create({
-          message: "Mise à jour réussie",
-          duration: 2000,
-          position: 'middle',
-          color: 'light',
-          icon: 'checkmark-circle'
-        });
-        toast.present();
-      },
-      error: async () => {
-        const toast = await this.toastCtrl.create({
-          message: "Échec de la mise à jour",
-          duration: 2000,
-          position: 'middle',
-          color: 'danger',
-          icon: 'close-circle'
-        });
-        toast.present();
-      }
-    });
+    // this.mysql.updateCoupon(code, updatedCoupon).subscribe({
+    //   next: async () => {
+    //     const toast = await this.toastCtrl.create({
+    //       message: "Mise à jour réussie",
+    //       duration: 2000,
+    //       position: 'middle',
+    //       color: 'light',
+    //       icon: 'checkmark-circle'
+    //     });
+    //     toast.present();
+    //   },
+    //   error: async () => {
+    //     const toast = await this.toastCtrl.create({
+    //       message: "Échec de la mise à jour",
+    //       duration: 2000,
+    //       position: 'middle',
+    //       color: 'danger',
+    //       icon: 'close-circle'
+    //     });
+    //     toast.present();
+    //   }
+    // });
+
+    try {
+      this.sqlite.updateCoupon(JSON.parse(code).idcoupon)
+      const toast = await this.toastCtrl.create({
+        message: "Mise à jour réussie",
+        duration: 2000,
+        position: 'middle',
+        color: 'light',
+        icon: 'checkmark-circle'
+      });
+      toast.present();
+    } catch (error) {
+      const toast = await this.toastCtrl.create({
+        message: "Échec de la mise à jour",
+        duration: 2000,
+        position: 'middle',
+        color: 'danger',
+        icon: 'close-circle'
+      });
+      toast.present();
+    }
   }
 
   

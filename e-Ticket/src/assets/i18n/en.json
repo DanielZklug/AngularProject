@@ -30,7 +30,8 @@
     "errorText": "Please enter a valid amount",
     "save": "Save",
     "success" : "Coupon created successfully 🎉",
-    "error" : "Failed to create the coupon ❌"
+    "error" : "Failed to create the coupon ❌",
+    "textError" : "Should not be blank"
   },
   "history":{
     "title" : "History",
@@ -45,7 +46,10 @@
     "success" : "Coupon deleted successfully 🎉",
     "error" : "Failed to delete the coupon ❌",
     "empty": "No coupon created yet",
-    "lang" : "en"
+    "lang" : "en",
+    "options" : "Options",
+    "deleteAll" : "Delete All",
+    "deleteUsed" : "Delete coupons used"
   },
   "scan":{
     "title" : "Scan",
@@ -57,6 +61,7 @@
     "update" : ""
   },
   "mycoupons":{
-    "title" : "My Coupons"
+    "title" : "My Coupons",
+    "all" : "All"
   }
 }

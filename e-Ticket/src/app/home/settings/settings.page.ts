@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { LocalStorage } from 'src/app/services/localstorage/local-storage';
 import { ToastController } from '@ionic/angular';
 import { 
   IonButtons,
@@ -50,11 +49,10 @@ export class SettingsPage implements OnInit {
   private paletteToggle = false;
   private theme = this.paletteToggle ? 'ligth' : 'dark'
   // Use matchMedia to check the user preference
-  private prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+  private prefersDark = window.matchMedia(`(prefers-color-scheme: ${this.paletteToggle})`);
 
   constructor(
     private translate: TranslateService,
-    private localstorage : LocalStorage,
     private alertController: AlertController,
     private toastCtrl: ToastController
   ) { }
@@ -136,7 +134,7 @@ export class SettingsPage implements OnInit {
     return this.paletteToggle;
   }
   
-  public set themeSettings(v : boolean) {
+  public set themeToggle(v : boolean) {
     this.paletteToggle = v;
   }
   

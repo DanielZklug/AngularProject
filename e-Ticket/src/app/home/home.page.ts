@@ -22,7 +22,6 @@ import {
   RefresherCustomEvent
 } from '@ionic/angular/standalone';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { LocalStorage } from '../services/localstorage/local-storage';
 import { Mysql } from '../services/mysql/mysql';
 
 @Component({
@@ -104,7 +103,7 @@ export class HomePage implements OnInit{
       route : 'mycoupons',
     }
   ]
-  constructor(private translate: TranslateService,private localStorage : LocalStorage, private mysql : Mysql) {}
+  constructor(private translate: TranslateService, private mysql : Mysql) {}
 
   handleRefresh(event: RefresherCustomEvent) {
     setTimeout(() => {

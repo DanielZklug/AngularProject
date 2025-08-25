@@ -13,7 +13,7 @@
     "language": "Langue",
     "darkMode": "Mode sombre",
     "notifications": "Notifications",
-    "appearance" : "Apparance",
+    "appearance" : "Apparence",
     "french" : "Français",
     "english" : "Anglais",
     "cancel": "Annuler",
@@ -33,7 +33,8 @@
     "errorText": "Veuillez entrer un montant valide",
     "save": "Enregistrer",
     "success" : "Coupon créé avec succès 🎉",
-    "error" : "Échec de la création du coupon ❌"
+    "error" : "Échec de la création du coupon ❌",
+    "textError" : "Ne devrait pas être vide"
   },
   "history":{
     "title" : "Historique",
@@ -48,7 +49,10 @@
     "success" : "Coupon supprimé avec succès 🎉",
     "error" : "Échec de la suppression du coupon ❌",
     "empty": "Aucun coupon créé pour le moment",
-    "lang" : "fr"
+    "lang" : "fr",
+    "options" : "Options",
+    "deleteAll" : "Tout supprimer",
+    "deleteUsed" : "Supprimer les coupons utilisés"
   },
   "scan" : {
     "title" : "Scan",
@@ -59,6 +63,7 @@
     "success" : "Coupon créé avec succès 🎉"
   },
   "mycoupons":{
-    "title" : "Mes Coupons"
+    "title" : "Mes Coupons",
+    "all" : "Tous"
   }
 }

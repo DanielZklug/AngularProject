@@ -23,11 +23,12 @@
       fill="outline"
       [placeholder]="'coupon.placeholderText' | translate"
       [helperText]="'coupon.helper' | translate"
+      [errorText]="'coupon.textError' | translate"
       [(ngModel)]="name"
       #nameInput="ngModel"
       name="name"
-      required
-      maxlength="50"
+      [required]="true"
+      maxlength="20"
       [counter]="true"
     >
     </ion-input>
@@ -44,10 +45,9 @@
       [(ngModel)]="amount"
       #amountInput="ngModel"
       name="amount"
-      required
       min="25"
       inputmode="numeric"
-      (ionChange)="onAmountChange($event)"
+      (ionInput)="onAmountChange($event)"
     >
     </ion-input>
     </ion-card-header>

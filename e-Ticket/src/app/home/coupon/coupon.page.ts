@@ -16,9 +16,8 @@ import {
   IonBackButton,
 } from '@ionic/angular/standalone';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-// import { Database } from 'src/app/services/database/database';
+import { Sqlite } from 'src/app/services/sqlite/sqlite';
 import { ToastController } from '@ionic/angular';
-import { LocalStorage} from 'src/app/services/localstorage/local-storage';
 import { Mysql } from 'src/app/services/mysql/mysql';
 import { generateUniqueId } from 'src/app/services/variables';
 
@@ -49,14 +48,14 @@ import { generateUniqueId } from 'src/app/services/variables';
 })
 export class CouponPage{
   private couponAmount : number = 25
-  private couponName : string = ''
+  private couponName : string = "e-Ticket";
   isMultipleOf25 : boolean = true;
 
   constructor(
-    private localStorage : LocalStorage,
     private toastCtrl: ToastController,
     private translate : TranslateService,
-    private mysql : Mysql 
+    private mysql : Mysql ,
+    private sqlite : Sqlite
   ) { }
 
   
@@ -83,7 +82,7 @@ export class CouponPage{
   async createCoupon() {
     const newCoupon = {
       idcoupon: generateUniqueId(),
-      name : this.couponName.toString(),
+      name : this.couponName.toString() === "" ? "e-Ticket" : this.couponName.toString(),
       amount: parseInt(this.couponAmount.toString()),
       create_at: Date.now(),
       status: 1,
@@ -92,7 +91,8 @@ export class CouponPage{
 
     try {
       // const response = this.localStorage.addCoupon(newCoupon,this.localStorage.firstKey)
-      const response = await this.mysql.addCoupon(newCoupon).toPromise();
+      //const response = await this.mysql.addCoupon(newCoupon).toPromise();
+      const response = await this.sqlite.addCoupon(newCoupon);
       console.log('Coupon ajouté:', response);
 
       const toast = await this.toastCtrl.create({
@@ -105,7 +105,7 @@ export class CouponPage{
       toast.present();
 
       this.couponAmount = 25;
-      this.couponName = '';
+      this.couponName = 'e-Ticket';
     } catch (error) {
       const toast = await this.toastCtrl.create({
         message: this.translate.instant('coupon.error'),
@@ -119,12 +119,12 @@ export class CouponPage{
     }
   }
 
-  onAmountChange(event: any) {
+  public onAmountChange(event: any) {
     const value = Number(event.detail.value);
     this.isMultipleOf25 = this.validateMultipleOf25(value);
   }
 
-  validateMultipleOf25(amount: number): boolean {
+  public validateMultipleOf25(amount: number): boolean {
     return amount > 0 && amount % 25 === 0;
   }
 

@@ -1,13 +1,31 @@
+<ion-menu side="end" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>{{'history.options' | translate}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list [style.background]="'transparent'" [inset]="true">
+      <ion-button expand="block">{{'history.deleteAll' | translate}}</ion-button>
+      <br>
+      <ion-button (click)="autoDeleteOption()" expand="block">{{'history.deleteUsed' | translate}}</ion-button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>{{'history.title' | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-buttons slot="start">
       <ion-back-button [text]="'home.backButton' | translate" defaultHref="/home"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" id="main-content">
   <ion-list>
     @if(couponsTable.length > 0){
       @for (item of couponsTable; track $index) {
